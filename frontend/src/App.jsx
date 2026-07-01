@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import DigitalClock from './components/DigitalClock'
 import ClockWidget from './components/ClockWidget'
 import AnalogClock from './components/AnalogClock'
+import WeatherDashboard from './components/WeatherDashboard'
 import axios from 'axios'
 import './App.css'
 
@@ -44,9 +45,9 @@ function App() {
       </header>
 
       {/* Navigation Tabs */}
-      <div className="bg-gray-800 border-b border-gray-700">
+      <div className="bg-gray-800 border-b border-gray-700 overflow-x-auto">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex gap-4">
+          <div className="flex gap-4 whitespace-nowrap">
             <button
               onClick={() => setActiveTab('stocks')}
               className={`px-6 py-3 font-semibold transition ${
@@ -86,6 +87,16 @@ function App() {
               }`}
             >
               🎯 Quick View
+            </button>
+            <button
+              onClick={() => setActiveTab('weather')}
+              className={`px-6 py-3 font-semibold transition ${
+                activeTab === 'weather'
+                  ? 'text-blue-400 border-b-2 border-blue-400'
+                  : 'text-gray-400 hover:text-white'
+              }`}
+            >
+              🌤️ Weather
             </button>
           </div>
         </div>
@@ -173,12 +184,15 @@ function App() {
             </div>
           </div>
         )}
+
+        {/* Weather Dashboard Tab */}
+        {activeTab === 'weather' && <WeatherDashboard />}
       </main>
 
       {/* Footer */}
       <footer className="bg-gray-800 border-t border-gray-700 mt-16">
         <div className="max-w-7xl mx-auto px-4 py-6 text-center text-gray-400">
-          <p>© 2024 Indian Stock Tracker. Real-time data for Indian markets.</p>
+          <p>© 2024 Indian Stock Tracker. Real-time data for Indian markets and weather.</p>
         </div>
       </footer>
     </div>
